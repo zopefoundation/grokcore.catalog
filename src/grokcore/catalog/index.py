@@ -11,7 +11,7 @@
 # FOR A PARTICULAR PURPOSE.
 #
 ##############################################################################
-"""Grok index definitions
+"""grokcore.catalog index definitions
 """
 import sys
 
@@ -25,7 +25,7 @@ from zc.catalog.catalogindex import SetIndex, ValueIndex
 from martian.error import GrokError, GrokImportError
 from martian.util import frame_is_class
 
-from grok.interfaces import IIndexDefinition
+from grokcore..interfaces import IIndexDefinition
 
 
 class IndexDefinition(object):
@@ -33,8 +33,8 @@ class IndexDefinition(object):
     class.
 
     This base class defines the actual behavior of
-    :class:`grok.index.Field` and the other kinds of attribute index
-    that Grok supports.  Upon our instantiation, we save every
+    :class:`grokcore.catalog.index.Field` and the other kinds of attribute
+    index that Grok supports. Upon our instantiation, we save every
     parameter that we were passed; later, if an index actually needs
     to be created (which is typically at the moment when a new
     :class:`grok.Application` object is added to the Zope Database),
