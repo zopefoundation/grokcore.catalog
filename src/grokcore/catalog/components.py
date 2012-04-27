@@ -13,7 +13,7 @@
 ##############################################################################
 
 import martian.util
-from grokcore.catalog.interfaces.IIndexDefinition
+from grokcore.catalog.interfaces import IIndexDefinition
 
 
 class IndexesClass(object):
@@ -63,7 +63,7 @@ class IndexesClass(object):
             if '.' in name:
                 setattr(self, name, value)
                 continue
-            if not interfaces.IIndexDefinition.providedBy(value):
+            if not IIndexDefinition.providedBy(value):
                 continue
             indexes[name] = value
         self.__grok_indexes__ = indexes

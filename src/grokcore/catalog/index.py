@@ -25,7 +25,7 @@ from zc.catalog.catalogindex import SetIndex, ValueIndex
 from martian.error import GrokError, GrokImportError
 from martian.util import frame_is_class
 
-from grokcore..interfaces import IIndexDefinition
+from grokcore.catalog.interfaces import IIndexDefinition
 
 
 class IndexDefinition(object):
