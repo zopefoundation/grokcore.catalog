@@ -56,7 +56,7 @@ class IndexesGrokker(martian.InstanceGrokker):
         subscribed = (site, IObjectAddedEvent)
         config.action(
             discriminator=None,
-            callable=zope.component.provideHandler,
+            callable=grokcore.component.util.provideHandler,
             args=(subscriber, subscribed))
         return True
 
