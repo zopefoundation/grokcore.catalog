@@ -29,15 +29,15 @@ from grokcore.catalog.interfaces import IIndexDefinition
 
 
 class IndexDefinition(object):
-    """The definition of a particular index in a :data:`grok.Indexes`
-    class.
+    """The definition of a particular index in a
+    :data:`grokcore.catalog.Indexes` class.
 
     This base class defines the actual behavior of
     :class:`grokcore.catalog.index.Field` and the other kinds of attribute
     index that Grok supports. Upon our instantiation, we save every
     parameter that we were passed; later, if an index actually needs
     to be created (which is typically at the moment when a new
-    :class:`grok.Application` object is added to the Zope Database),
+    :class:`grokcore.site.Application` object is added to the Zope Database),
     then our :meth:`setup()` method gets called.
 
     The only parameter that is actually significant to us is `attribute`
@@ -69,7 +69,8 @@ class IndexDefinition(object):
     def setup(self, catalog, name, context, module_info):
         # If the user supplied attribute= when instantiating us, we
         # allow that value to override the attribute name under which we
-        # are actually stored inside of the `grok.Indexes` instance.
+        # are actually stored inside of the `grokcore.catalog.Indexes`
+        # instance.
         if self._attribute is not None:
             field_name = self._attribute
         else:
@@ -79,10 +80,11 @@ class IndexDefinition(object):
             try:
                 method = context[field_name]
             except KeyError:
-                raise GrokError("grok.Indexes in %r refers to an attribute or "
-                                "method %r on interface %r, but this does not "
-                                "exist." % (module_info.getModule(),
-                                            field_name, context), None)
+                raise GrokError(
+                    "grokcore.catalog.Indexes in %r refers to an attribute or "
+                    "method %r on interface %r, but this does not "
+                    "exist." % (module_info.getModule(),
+                                field_name, context), None)
             call = IMethod.providedBy(method)
         else:
             call = callable(getattr(context, field_name, None))
@@ -94,24 +96,29 @@ class IndexDefinition(object):
 
 
 class Field(IndexDefinition):
-    """A :class:`grok.Indexes` index that matches against an entire field."""
+    """A :class:`grokcore.catalog.Indexes` index that matches
+    against an entire field.
+    """
     index_class = FieldIndex
 
 
 class Text(IndexDefinition):
-    """A :class:`grok.Indexes` index supporting full-text searches of a
-    field."""
+    """A :class:`grokcore.catalog.Indexes` index supporting
+    full-text searches of a field.
+    """
     index_class = TextIndex
 
 
 class Set(IndexDefinition):
-    """A :class:`grok.Indexes` index supporting keyword searches of a field."""
+    """A :class:`grokcore.catalog.Indexes` index supporting
+    keyword searches of a field.
+    """
     index_class = SetIndex
 
 
 class Value(IndexDefinition):
-    """A :class:`grok.Indexes` index similar to, but more flexible than
-    :class:`grok.Field` index.
+    """A :class:`grokcore.catalog.Indexes` index similar to,
+    but more flexible than :class:`grokcore.catalog.Field` index.
 
     The index allows searches for documents that contain any of a set of
     values; between a set of values; any (non-None) values; and any empty

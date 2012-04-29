@@ -5,10 +5,10 @@ import grokcore.catalog
 
 from pkg_resources import resource_listdir
 from zope.testing import doctest
-from zope.app.appsetup.testlayer import ZODBLayer
+from zope.app.wsgi.testlayer import BrowserLayer
 
 
-FunctionalLayer = ZODBLayer(grokcore.catalog)
+FunctionalLayer = BrowserLayer(grokcore.catalog)
 
 
 def suiteFromPackage(name):

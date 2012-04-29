@@ -18,6 +18,7 @@ tests_require = [
     'zope.configuration',
     'zope.location',
     'zope.testing',
+    'zope.app.wsgi',
     ]
 
 setup(
@@ -57,6 +58,7 @@ setup(
         'zope.interface',
         'zope.intid',
         'zope.lifecycleevent',
+        'zope.keyreference',
         'zope.site',
         ],
     tests_require=tests_require,

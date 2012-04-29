@@ -7,7 +7,7 @@ the application) for the Indexes however, otherwise we get a GrokError:
   >>> testing.grok(__name__)
   Traceback (most recent call last):
     ...
-  GrokError: No site specified for grok.Indexes subclass in module
+  GrokError: No site specified for grokcore.catalog.Indexes subclass in module
   <module 'grokcore.catalog.tests.catalog.indexes_no_app' from ...>.
   Use grokcore.site.site() to specify.
   

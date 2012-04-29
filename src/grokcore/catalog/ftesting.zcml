@@ -4,6 +4,8 @@
    i18n_domain="grokcore.catalog"
    package="grokcore.catalog">
 
+
+  <include package="zope.container" />
   <include package="zope.app.appsetup" file="ftesting.zcml" />
   <include package="grokcore.catalog" />
   <grok:grok package="grokcore.catalog.ftests" />

@@ -41,7 +41,7 @@ class IndexesGrokker(martian.InstanceGrokker):
 
         if site is None:
             raise GrokError(
-                "No site specified for grok.Indexes "
+                "No site specified for grokcore.catalog.Indexes "
                 "subclass in module %r. "
                 "Use grokcore.site.site() to specify."
                 % module_info.getModule(), factory)
@@ -98,7 +98,7 @@ class IndexesSetupSubscriber(object):
                 index.setup(catalog, name, self.context, self.module_info)
             except DuplicationError:
                 raise GrokError(
-                    "grok.Indexes in module %r causes "
+                    "grokcore.catalog.Indexes in module %r causes "
                     "creation of catalog index %r in catalog %r, "
                     "but an index with that name is already present." %
                     (self.module_info.getModule(), name, self.catalog_name),
