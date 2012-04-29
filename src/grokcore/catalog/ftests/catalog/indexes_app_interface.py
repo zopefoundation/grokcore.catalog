@@ -55,21 +55,21 @@ other tests::
   True
 """
 
+import grokcore.site
 import grokcore.catalog
-from grokcore.content import Container, Application
-from zope.interface import Interface, implements
-from zope import schema
+from grokcore.content import Container
+from zope.interface import Attribute, Interface, implements
 
 
 class IHerd(Interface):
     pass
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     implements(IHerd)
 
 
-class Herd2(Container, Application):
+class Herd2(Container, grokcore.site.Application):
     implements(IHerd)
 
 
@@ -82,10 +82,10 @@ class IMammoth(Interface):
         """
 
 
-class MammothIndexes(grok.Indexes):
-    grok.site(IHerd)
-    grok.context(IMammoth)
+class MammothIndexes(grokcore.catalog.Indexes):
+    grokcore.site.site(IHerd)
+    grokcore.catalog.context(IMammoth)
 
-    name = index.Field()
-    age = index.Field()
-    message = index.Text()
+    name = grokcore.catalog.Field()
+    age = grokcore.catalog.Field()
+    message = grokcore.catalog.Text()

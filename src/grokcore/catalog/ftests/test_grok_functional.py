@@ -33,11 +33,13 @@ def suiteFromPackage(name):
         suite.addTest(test)
     return suite
 
+
 def test_suite():
     suite = unittest.TestSuite()
     for name in ["catalog"]:
         suite.addTest(suiteFromPackage(name))
     return suite
+
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')

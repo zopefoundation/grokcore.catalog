@@ -12,6 +12,7 @@ long_description = (
     read('README.txt') + '\n' + read('CHANGES.txt'))
 
 tests_require = [
+    'grokcore.content',
     'zope.app.appsetup',
     'zope.component',
     'zope.configuration',
@@ -42,13 +43,21 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'setuptools',
         'grokcore.component >= 2.1',
-        'martian >= 0.13',
         'grokcore.site',
+        'martian >= 0.13',
+        'setuptools',
         'zc.catalog',
+        'zope.annotation',
         'zope.catalog',
+        'zope.component',
+        'zope.container',
+        'zope.event',
+        'zope.exceptions',
         'zope.interface',
+        'zope.intid',
+        'zope.lifecycleevent',
+        'zope.site',
         ],
     tests_require=tests_require,
     extras_require={'test': tests_require},

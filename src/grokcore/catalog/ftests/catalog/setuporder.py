@@ -36,26 +36,26 @@ other tests::
 
 """
 
-from zope import schema, interface
+from zope import interface
 from zope.intid import IntIds
 from zope.intid.interfaces import IIntIds
 from zope.catalog.catalog import Catalog
 from zope.catalog.interfaces import ICatalog
 from zope.catalog.field import FieldIndex
-from grokcore.content import Model, Container, Site
-from grokcore.site import local_utility
+from grokcore.content import Model, Container
+from grokcore.site import local_utility, Site
 
 
 def setup_catalog(catalog):
     catalog['name'] = FieldIndex('name', IMammoth)
 
 
-class IMammoth(Interface):
-    name = Attribute('Name')
+class IMammoth(interface.Interface):
+    name = interface.Attribute('Name')
 
 
 class Mammoth(Model):
-    grok.implements(IMammoth)
+    interface.implements(IMammoth)
 
     def __init__(self, name):
         self.name = name
@@ -66,4 +66,4 @@ class BaseHerd(Container, Site):
 
 
 class Herd(BaseHerd):
-    grok.local_utility(Catalog, provides=ICatalog, setup=setup_catalog)
+    local_utility(Catalog, provides=ICatalog, setup=setup_catalog)

@@ -33,27 +33,33 @@ other tests::
 
 """
 
-import grok
-from zope import schema, interface
+import grokcore.site
+from zope import interface
 from zope.intid import IntIds
 from zope.intid.interfaces import IIntIds
 from zope.catalog.catalog import Catalog
 from zope.catalog.interfaces import ICatalog
 from zope.catalog.field import FieldIndex
+from grokcore.content import Model, Container
+
 
 def setup_catalog(catalog):
     catalog['name'] = FieldIndex('name', IMammoth)
 
+
 class IMammoth(interface.Interface):
+    name = interface.Attribute()
 
-    name = schema.TextLine()
 
-class Mammoth(grok.Model):
-    grok.implements(IMammoth)
+class Mammoth(Model):
+    interface.implements(IMammoth)
 
     def __init__(self, name):
         self.name = name
 
-class Herd(grok.Container, grok.Site):
-    grok.local_utility(IntIds, provides=IIntIds)
-    grok.local_utility(Catalog, provides=ICatalog, setup=setup_catalog)
+
+class Herd(Container, grokcore.site.Site):
+    grokcore.site.local_utility(
+        IntIds, provides=IIntIds)
+    grokcore.site.local_utility(
+        Catalog, provides=ICatalog, setup=setup_catalog)

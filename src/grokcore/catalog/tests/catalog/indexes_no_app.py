@@ -3,7 +3,8 @@ Grok allows you to set up catalog indexes in your application with a
 special indexes declaration.  We do need to specify a site (such as
 the application) for the Indexes however, otherwise we get a GrokError:
 
-  >>> grokcore.catalog.testing.grok(__name__)
+  >>> from grokcore.catalog import testing
+  >>> testing.grok(__name__)
   Traceback (most recent call last):
     ...
   GrokError: No site specified for grok.Indexes subclass in module
@@ -11,13 +12,14 @@ the application) for the Indexes however, otherwise we get a GrokError:
   Use grokcore.site.site() to specify.
   
 """
+import grokcore.site
 import grokcore.catalog
 import grokcore.component
 from grokcore.site import Application
 from grokcore.content import Model, Container
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 

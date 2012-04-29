@@ -36,12 +36,11 @@ Unfortunately ftests don't have good isolation from each other yet.
 
 import grokcore.catalog
 import grokcore.site
-from grokcore.content import Container, Application
-from zope.interface import Interface
-from zope import schema
+from grokcore.content import Container
+from zope.interface import Interface, Attribute
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 
@@ -73,8 +72,8 @@ class MammothIndexes(grokcore.catalog.Indexes):
 
 
 class MammothIndexes2(grokcore.catalog.Indexes):
-    grok.site(Herd)
-    grok.context(IMammoth2)
+    grokcore.site.site(Herd)
+    grokcore.catalog.context(IMammoth2)
 
     name2 = grokcore.catalog.Field()
     age2 = grokcore.catalog.Field()

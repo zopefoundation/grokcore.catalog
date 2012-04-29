@@ -34,11 +34,11 @@ other tests::
 
 import grokcore.site
 import grokcore.catalog 
-from grokcore.content import Container, Site
-from zope.interface import Interface
+from grokcore.content import Container
+from zope.interface import Interface, Attribute
 
 
-class Herd(Container, Site):
+class Herd(Container, grokcore.site.Site):
     pass
 
 
@@ -52,7 +52,7 @@ class IMammoth(Interface):
 
 
 class MammothIndexes(grokcore.catalog.Indexes):
-    grokcore.catalog.site(Herd)
+    grokcore.site.site(Herd)
     grokcore.catalog.context(IMammoth)
 
     name = grokcore.catalog.Field()

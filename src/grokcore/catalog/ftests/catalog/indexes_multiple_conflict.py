@@ -34,30 +34,31 @@ other tests::
 Unfortunately ftests don't have good isolation from each other yet.
 """
 
+import grokcore.site
 import grokcore.catalog
-from grokcore.content import Container, Application, Model
-from zope.interface import Interface
+from grokcore.content import Container
+from zope.interface import Interface, Attribute
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 
 class IMammoth(Interface):
-    name = Attribute('')
+    name = Attribute('name')
 
 
 class IMammoth2(Interface):
-    name = Attribute('')
+    name = Attribute('name')
 
 
 class MammothIndexes(grokcore.catalog.Indexes):
-    grokcore.catalog.site(Herd)
+    grokcore.site.site(Herd)
     grokcore.catalog.context(IMammoth)
     name = grokcore.catalog.Field()
 
 
 class MammothIndexes2(grokcore.catalog.Indexes):
-    grokcore.catalog.site(Herd)
+    grokcore.site.site(Herd)
     grokcore.catalog.context(IMammoth2)
     name = grokcore.catalog.Field()

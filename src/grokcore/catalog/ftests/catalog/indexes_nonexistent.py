@@ -37,17 +37,17 @@ other tests::
 
 import grokcore.site
 import grokcore.catalog
-from zope.interface import Interface
-from grokcore.content import Container, Application
+from zope.interface import Interface, Attribute
+from grokcore.content import Container
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 
 class IMammoth(Interface):
-    name = Attribute('')
-    age = Attribute('')
+    name = Attribute('name')
+    age = Attribute('age')
 
     def message():
         """Message the mammoth has for the world.

@@ -53,11 +53,12 @@ other tests::
 Unfortunately ftests don't have good isolation from each other yet.
 """
 
+import grokcore.site
 import grokcore.catalog
-from grokcore.content import Container, Application, Model
+from grokcore.content import Container, Model
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 
@@ -72,9 +73,9 @@ class Mammoth(Model):
         return self._message
 
 
-class MammothIndexes(Indexes):
+class MammothIndexes(grokcore.catalog.Indexes):
     grokcore.catalog.context(Mammoth)
-    grokcore.catalog.site(Herd)
+    grokcore.site.site(Herd)
     
     name = grokcore.catalog.Field()
     age = grokcore.catalog.Field()

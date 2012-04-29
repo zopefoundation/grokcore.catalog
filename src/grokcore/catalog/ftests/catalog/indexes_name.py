@@ -36,10 +36,10 @@ Unfortunately ftests don't have good isolation from each other yet.
 """
 import grokcore.site
 import grokcore.catalog
-from grokcore.content import Container, Application, Model
+from grokcore.content import Container, Model
 
 
-class Herd(Container, Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
 

@@ -39,28 +39,31 @@ other tests::
   True
 """
 
-from zope.interface import Interface
-from zope import schema
+import grokcore.site
+import grokcore.catalog
+from grokcore.content import Container, Model
+from zope.interface import implements, Attribute, Interface
 
-import grok
-from grok import index
 
-class Herd(grok.Container, grok.Application):
+class Herd(Container, grokcore.site.Application):
     pass
 
+
 class IMammoth(Interface):
-    name = schema.TextLine(title=u'Name')
-    age = schema.Int(title=u'Age')
+    age = Attribute('Age')
+    name = Attribute('Name')
 
-class MammothIndexes(grok.Indexes):
-    grok.site(Herd)
-    grok.context(IMammoth)
 
-    name = index.Field()
-    how_old = index.Field(attribute='age')
+class MammothIndexes(grokcore.catalog.Indexes):
+    grokcore.site.site(Herd)
+    grokcore.catalog.context(IMammoth)
 
-class Mammoth(grok.Model):
-    grok.implements(IMammoth)
+    name = grokcore.catalog.Field()
+    how_old = grokcore.catalog.Field('age')
+
+
+class Mammoth(Model):
+    implements(IMammoth)
 
     def __init__(self, name, age):
         self.name = name
