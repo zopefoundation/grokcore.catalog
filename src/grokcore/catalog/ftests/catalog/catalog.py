@@ -48,7 +48,7 @@ def setup_catalog(catalog):
 
 
 class IMammoth(interface.Interface):
-    name = interface.Attribute()
+    name = interface.Attribute('name')
 
 
 class Mammoth(Model):
