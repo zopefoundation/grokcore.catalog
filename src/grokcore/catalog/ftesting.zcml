@@ -5,9 +5,7 @@
    package="grokcore.catalog">
 
   <include package="zope.app.appsetup" file="ftesting.zcml" />
-
-  <include package="grokcore.catalog" file="meta.zcml" />
-
+  <include package="grokcore.catalog" />
   <grok:grok package="grokcore.catalog.ftests" />
 
 </configure>

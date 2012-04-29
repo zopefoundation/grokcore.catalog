@@ -21,6 +21,7 @@ We are able to query the catalog::
   >>> from zope.catalog.interfaces import ICatalog
   >>> from zope.component import getUtility, queryUtility
   >>> catalog = getUtility(ICatalog)
+  
   >>> for obj in catalog.searchResults(how_old=(13, 13)):
   ...   print obj.name
   Alpha
@@ -59,7 +60,7 @@ class MammothIndexes(grokcore.catalog.Indexes):
     grokcore.catalog.context(IMammoth)
 
     name = grokcore.catalog.Field()
-    how_old = grokcore.catalog.Field('age')
+    how_old = grokcore.catalog.Field(attribute='age')
 
 
 class Mammoth(Model):
