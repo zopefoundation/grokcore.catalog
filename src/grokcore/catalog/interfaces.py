@@ -15,7 +15,6 @@
 """
 from zope import interface
 
-
 class IIndexDefinition(interface.Interface):
     """Define an index for grok.Indexes.
     """
@@ -26,3 +25,6 @@ class IIndexDefinition(interface.Interface):
         Use name for index name and attribute to index. Set up
         index for interface or class context.
         """
+
+class IBaseClasses(Interface):
+    Indexes = Attribute("Base class for a catalog indexes component.")
