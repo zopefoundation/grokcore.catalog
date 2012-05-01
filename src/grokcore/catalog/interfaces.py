@@ -13,9 +13,9 @@
 ##############################################################################
 """grokcore.catalog interfaces
 """
-from zope import interface
+from zope.interface import Interface, Attribute
 
-class IIndexDefinition(interface.Interface):
+class IIndexDefinition(Interface):
     """Define an index for grok.Indexes.
     """
 
