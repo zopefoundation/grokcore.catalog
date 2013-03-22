@@ -18,6 +18,7 @@ import sys
 from zope.interface import implements
 from zope.interface.interfaces import IMethod, IInterface
 
+import zope.catalog.interfaces
 from zope.catalog.field import FieldIndex
 from zope.catalog.text import TextIndex
 from zc.catalog.catalogindex import SetIndex, ValueIndex
@@ -89,11 +90,14 @@ class IndexDefinition(object):
         else:
             call = callable(getattr(context, field_name, None))
             context = None  # no interface lookup
-        catalog[name] = self.index_class(field_name=field_name,
+        if not zope.catalog.interfaces.IAttributeIndex.implementedBy(self.index_class):
+            inst = self.index_class(*self._args, **self._kw)
+        else:
+            inst = self.index_class(field_name=field_name,
                                          interface=context,
                                          field_callable=call,
                                          *self._args, **self._kw)
-
+        catalog[name] = inst
 
 class Field(IndexDefinition):
     """A :class:`grokcore.catalog.Indexes` index that matches
