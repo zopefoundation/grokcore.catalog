@@ -72,6 +72,14 @@ class IndexDefinition(object):
         # allow that value to override the attribute name under which we
         # are actually stored inside of the `grokcore.catalog.Indexes`
         # instance.
+
+        if not zope.catalog.interfaces.IAttributeIndex.implementedBy(self.index_class):
+            # For indexes that do not implement IAttributeIndex, we cannot do
+            # magic (helpful?) things. In these cases, just initialize the
+            # index with the given attributes.
+            catalog[name] = self.index_class(*self._args, **self._kw)
+            return
+
         if self._attribute is not None:
             field_name = self._attribute
         else:
@@ -90,14 +98,11 @@ class IndexDefinition(object):
         else:
             call = callable(getattr(context, field_name, None))
             context = None  # no interface lookup
-        if not zope.catalog.interfaces.IAttributeIndex.implementedBy(self.index_class):
-            inst = self.index_class(*self._args, **self._kw)
-        else:
-            inst = self.index_class(field_name=field_name,
-                                         interface=context,
-                                         field_callable=call,
-                                         *self._args, **self._kw)
-        catalog[name] = inst
+        catalog[name] = self.index_class(
+            field_name=field_name,
+            interface=context,
+            field_callable=call,
+            *self._args, **self._kw)
 
 class Field(IndexDefinition):
     """A :class:`grokcore.catalog.Indexes` index that matches
