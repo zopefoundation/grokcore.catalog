@@ -72,11 +72,11 @@ class IndexDefinition(object):
         # allow that value to override the attribute name under which we
         # are actually stored inside of the `grokcore.catalog.Indexes`
         # instance.
-
-        if not zope.catalog.interfaces.IAttributeIndex.implementedBy(self.index_class):
-            # For indexes that do not implement IAttributeIndex, we cannot do
-            # magic (helpful?) things. In these cases, just initialize the
-            # index with the given attributes.
+        attrindex_iface = zope.catalog.interfaces.IAttributeIndex
+        if not attrindex_iface.implementedBy(self.index_class):
+            # For indexes that do not implement IAttributeIndex, we
+            # cannot do magic things. In these cases, just initialize
+            # the index with the given attributes.
             catalog[name] = self.index_class(*self._args, **self._kw)
             return
 
