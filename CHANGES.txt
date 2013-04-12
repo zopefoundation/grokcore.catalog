@@ -1,11 +1,10 @@
 CHANGES
 *******
 
-1.1 (unreleased)
-================
+1.1-md1 (unreleased)
+====================
 
-- Nothing changed yet.
-
+- Add support for non-IAttributeIndex indexes.
 
 1.0 (2012-05-01)
 ================
