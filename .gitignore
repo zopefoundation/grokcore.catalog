@@ -1,0 +1,14 @@
+syntax:glob
+
+*.bak
+*.pyc
+*.pyo
+*.swp
+bin
+develop/*
+develop-eggs
+eggs
+.installed.cfg
+.mr.developer.cfg
+parts
+src/*.egg-info
