@@ -1,7 +1,7 @@
 CHANGES
 *******
 
-2.0 (unreleased)
+2.0 (2013-05-07)
 ================
 
 - Rename IIndexDefinition and IndexDefinition into IAttributeIndexDefinition
