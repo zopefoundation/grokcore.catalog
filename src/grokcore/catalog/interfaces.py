@@ -19,11 +19,32 @@ class IIndexDefinition(Interface):
     """Define an index for grok.Indexes.
     """
 
+    def __init__(self, *args, **kw):
+        """Arguments and keyword arguments passed to the index class.
+
+        All parameters are simply passed along to the index class we create,
+        which interprets them as configuration details of its own.
+        """
+
     def setup(catalog, name, context):
         """Set up index called name in given catalog.
 
         Use name for index name and attribute to index. Set up
         index for interface or class context.
+        """
+
+class IAttributeIndexDefinition(IIndexDefinition):
+    """Define an index for grok.Indexes providing IAttributeIndex.
+    """
+
+    def __init__(self, attribute=None, *args, **kw):
+        """Attribute to index.
+
+        Attribute (optionally) defines the attribute we should index. All
+        other parameters are simply passed along to the index class we
+        create, which interprets them as configuration details of its own.
+
+        Arguments and keyword arguments passed to the index class.
         """
 
 class IBaseClasses(Interface):

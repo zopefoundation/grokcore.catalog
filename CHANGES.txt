@@ -4,8 +4,13 @@ CHANGES
 1.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Rename IIndexDefinition and IndexDefinition into IAttributeIndexDefinition
+  and AtributeIndexDefinition respectively. This is used for the current
+  index "classes" and allow for setup() magic when creating new catalogs.
 
+  This allows for IIndexDefinition and IndexDefinition to be used for
+  simpler catalog index definitions where no Grok magic is applied when
+  creating catalogs.
 
 1.0 (2012-05-01)
 ================
