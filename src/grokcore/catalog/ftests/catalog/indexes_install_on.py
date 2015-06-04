@@ -1,22 +1,33 @@
 """
 Grok allows you to set up catalog indexes in your application with a
-special indexes declaration. In fact, we have multiple grok.Indexes
-setting up more than one set of indexes in the same catalog.
+special indexes declaration. In fact, these indexes can be set up for
+any site::
 
 Let's set up a site in which we manage a couple of objects::
 
+  >>> from zope.site.hooks import setSite
+
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd
-  >>> from zope.site.hooks import setSite
   >>> setSite(herd)
 
-We are able to query the catalog::
+The catalog is not yet in the site::
 
   >>> from zope.catalog.interfaces import ICatalog
-  >>> from zope.component import getUtility, queryUtility
-  >>> catalog = getUtility(ICatalog)
-  >>> sorted(catalog.keys())
-  [u'age', u'age2', u'message', u'message2', u'name', u'name2']
+  >>> from zope.component import queryUtility
+
+  >>> catalog = queryUtility(ICatalog, default=None)
+  >>> catalog is None
+  True
+
+After a mud party it gets there though:
+
+  >>> from zope.event import notify
+
+  >>> notify(MudPartyEvent(herd))
+  >>> catalog = queryUtility(ICatalog, default=None)
+  >>> catalog is not None
+  True
 
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
@@ -31,17 +42,25 @@ other tests::
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
 
-Unfortunately ftests don't have good isolation from each other yet.
 """
 
-import grokcore.catalog
 import grokcore.site
+import grokcore.catalog
 from grokcore.content import Container
-from zope.interface import Interface, Attribute
+from zope.interface import Interface, Attribute, implements
+from zope.component.interfaces import ObjectEvent, IObjectEvent
 
 
-class Herd(Container, grokcore.site.Application):
+class Herd(Container, grokcore.site.Site):
     pass
+
+
+class IMudPartyEvent(IObjectEvent):
+    pass
+
+
+class MudPartyEvent(ObjectEvent):
+    implements(IMudPartyEvent)
 
 
 class IMammoth(Interface):
@@ -53,28 +72,11 @@ class IMammoth(Interface):
         """
 
 
-class IMammoth2(Interface):
-    name2 = Attribute('Name')
-    age2 = Attribute('Age')
-
-    def message2():
-        """Message the mammoth has for the world.
-        """
-
-
 class MammothIndexes(grokcore.catalog.Indexes):
-    grokcore.site.site(Herd)
     grokcore.catalog.context(IMammoth)
+    grokcore.site.site(Herd)
+    grokcore.site.install_on(IMudPartyEvent)
 
     name = grokcore.catalog.Field()
     age = grokcore.catalog.Field()
     message = grokcore.catalog.Text()
-
-
-class MammothIndexes2(grokcore.catalog.Indexes):
-    grokcore.site.site(Herd)
-    grokcore.catalog.context(IMammoth2)
-
-    name2 = grokcore.catalog.Field()
-    age2 = grokcore.catalog.Field()
-    message2 = grokcore.catalog.Text()

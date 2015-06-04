@@ -45,7 +45,7 @@ indexes for won't have a catalog available::
   >>> queryUtility(ICatalog, default=None) is None
   True
   >>> setSite(herd)
-  
+
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
 

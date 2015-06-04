@@ -33,7 +33,7 @@ other tests::
 """
 
 import grokcore.site
-import grokcore.catalog 
+import grokcore.catalog
 from grokcore.content import Container
 from zope.interface import Interface, Attribute
 

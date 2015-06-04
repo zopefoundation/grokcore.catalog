@@ -43,7 +43,7 @@ Now let's create another application providing the same interface::
   True
   >>> catalog.get('name') is not None
   True
-  
+
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
 

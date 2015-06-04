@@ -36,7 +36,7 @@ Let's query the text index, which incidentally also indexes a method::
   ['Alpha']
   >>> sortedResults(catalog, message='bye')
   ['Beta']
-  
+
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
 
@@ -76,7 +76,7 @@ class Mammoth(Model):
 class MammothIndexes(grokcore.catalog.Indexes):
     grokcore.catalog.context(Mammoth)
     grokcore.site.site(Herd)
-    
+
     name = grokcore.catalog.Field()
     age = grokcore.catalog.Field()
     message = grokcore.catalog.Text()

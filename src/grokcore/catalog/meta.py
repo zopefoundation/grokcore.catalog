@@ -13,13 +13,13 @@
 ##############################################################################
 """grokcore.catalog meta
 """
-import grokcore.component
-import grokcore.site
 import martian
 import zope.component
+import grokcore.component
+import grokcore.site
+import grokcore.site.interfaces
 
 from grokcore.catalog.components import IndexesClass
-from grokcore.site import site
 from martian.error import GrokError
 from zope.catalog.catalog import Catalog
 from zope.catalog.interfaces import ICatalog
@@ -37,6 +37,8 @@ class IndexesGrokker(martian.InstanceGrokker):
         site = grokcore.site.site.bind().get(factory)
         context = grokcore.component.context.bind().get(
             factory, module_info.getModule())
+        install_on = grokcore.site.install_on.bind(
+            default=IObjectAddedEvent).get(factory)
         catalog_name = grokcore.component.name.bind().get(factory)
 
         if site is None:
@@ -53,7 +55,7 @@ class IndexesGrokker(martian.InstanceGrokker):
         subscriber = IndexesSetupSubscriber(
             catalog_name, indexes, context, module_info)
 
-        subscribed = (site, IObjectAddedEvent)
+        subscribed = (site, install_on)
         config.action(
             discriminator=None,
             callable=grokcore.component.provideHandler,
@@ -88,7 +90,7 @@ class IndexesSetupSubscriber(object):
     def __call__(self, site, event):
         # make sure we have an intids
         self._createIntIds(site)
-        
+
         # get the catalog
         catalog = self._createCatalog(site)
 

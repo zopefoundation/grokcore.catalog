@@ -4,7 +4,9 @@ CHANGES
 2.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Make possible to install a catalog in a site on a different event
+  than ``IObjectAddedEvent`` using the ``grokcore.site.install_on``
+  directive.
 
 
 2.0 (2013-05-07)

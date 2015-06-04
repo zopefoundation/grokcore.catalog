@@ -5,10 +5,10 @@ import grokcore.catalog
 
 from pkg_resources import resource_listdir
 from zope.testing import doctest
-from zope.app.wsgi.testlayer import BrowserLayer
+from zope.app.appsetup.testlayer import ZODBLayer
 
 
-FunctionalLayer = BrowserLayer(grokcore.catalog)
+FunctionalLayer = ZODBLayer(grokcore.catalog)
 
 
 def suiteFromPackage(name):
@@ -24,10 +24,9 @@ def suiteFromPackage(name):
         test = doctest.DocTestSuite(
             dottedname,
             extraglobs=dict(getRootFolder=FunctionalLayer.getRootFolder),
-            optionflags=(doctest.ELLIPSIS+
-                         doctest.NORMALIZE_WHITESPACE+
-                         doctest.REPORT_NDIFF)
-            )
+            optionflags=(doctest.ELLIPSIS +
+                         doctest.NORMALIZE_WHITESPACE +
+                         doctest.REPORT_NDIFF))
         test.layer = FunctionalLayer
 
         suite.addTest(test)

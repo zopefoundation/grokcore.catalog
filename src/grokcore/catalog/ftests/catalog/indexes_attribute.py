@@ -21,7 +21,7 @@ We are able to query the catalog::
   >>> from zope.catalog.interfaces import ICatalog
   >>> from zope.component import getUtility, queryUtility
   >>> catalog = getUtility(ICatalog)
-  
+
   >>> for obj in catalog.searchResults(how_old=(13, 13)):
   ...   print obj.name
   Alpha
