@@ -1,7 +1,7 @@
 CHANGES
 *******
 
-2.1 (unreleased)
+2.1 (2015-06-11)
 ================
 
 - Make possible to install a catalog in a site on a different event
