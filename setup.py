@@ -45,7 +45,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'grokcore.component >= 2.5dev',
-        'grokcore.site',
+        'grokcore.site >= 1.7',
         'martian >= 0.13',
         'setuptools',
         'zc.catalog',
