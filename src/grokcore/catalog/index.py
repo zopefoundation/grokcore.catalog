@@ -14,7 +14,13 @@
 """grokcore.catalog index definitions
 """
 import sys
+import calendar
+import datetime
+import BTrees.Length
 import zope.catalog.interfaces
+import zope.catalog.attribute
+import zope.container.contained
+
 from zope.interface import implements
 from zope.interface.interfaces import IMethod, IInterface
 from zope.catalog.interfaces import IAttributeIndex
@@ -156,3 +162,44 @@ class Value(AttributeIndexDefinition):
     values.
     """
     index_class = ValueIndex
+
+
+def to_timestamp(dt):
+    return calendar.timegm(dt.timetuple())
+
+
+def from_timestamp(stamp):
+    return datetime.datetime.fromtimestamp(float(stamp))
+
+
+class _DatetimeIndex(ValueIndex):
+
+    def clear(self):
+        self.values_to_documents = BTrees.LOBTree.LOBTree()
+        self.documents_to_values = BTrees.LLBTree.LLBTree()
+        self.documentCount = BTrees.Length.Length(0)
+        self.wordCount = BTrees.Length.Length(0)
+
+    def index_doc(self, doc_id, value):
+        if value is None:
+            return
+        value = to_timestamp(value)
+        super(_DatetimeIndex, self).index_doc(doc_id, value)
+
+    # def apply():
+    #     pass
+
+
+class DatetimeIndex(
+        zope.catalog.attribute.AttributeIndex,
+        _DatetimeIndex,
+        zope.container.contained.Contained):
+    pass
+
+
+class Datetime(AttributeIndexDefinition):
+    """A :class:`grokcore.catalog.Indexes` index specifically meant for
+    datetime objects.
+
+    """
+    index_class = DatetimeIndex
