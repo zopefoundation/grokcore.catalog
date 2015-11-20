@@ -4,8 +4,9 @@ CHANGES
 2.2 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Introduce Datetime index that's more optimized for index datetime objects.
+  Please note the index uses seconds-resolution (the integer timestamp
+  representing the datetime's value).
 
 2.1 (2015-06-11)
 ================
@@ -13,7 +14,6 @@ CHANGES
 - Make possible to install a catalog in a site on a different event
   than ``IObjectAddedEvent`` using the ``grokcore.site.install_on``
   directive.
-
 
 2.0 (2013-05-07)
 ================
