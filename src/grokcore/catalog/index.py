@@ -185,12 +185,17 @@ class _DatetimeIndex(zc.catalog.index.ValueIndex):
         super(_DatetimeIndex, self).index_doc(doc_id, value)
 
     def apply(self, query):
-        for name in ['any_of', 'between']:
-            if name not in query:
-                continue
+        if 'any_of' in query:
             # The "value" of the dict is a sequence of datetime objects.
             # Convert it into a timestamps.
-            query[name] = [to_timestamp(v) for v in query[name]]
+            query['any_of'] = [to_timestamp(v) for v in query['any_of']]
+        elif 'between' in query:
+            # The "value" of the dict is a sequence of arguments to pass on to
+            # the underlying btree. Convert the first two parameters that are
+            # datetime objects (or None) into timestamps.
+            query['between'] = parameters = list(query['between'])
+            parameters[0] = to_timestamp(parameters[0])
+            parameters[1] = to_timestamp(parameters[1])
         return super(_DatetimeIndex, self).apply(query)
 
     def values(self, min=None, max=None, excludemin=False, excludemax=False,
