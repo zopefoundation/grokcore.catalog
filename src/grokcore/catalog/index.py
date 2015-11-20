@@ -165,6 +165,8 @@ class Value(AttributeIndexDefinition):
 
 
 def to_timestamp(dt):
+    if dt is None:
+        return None
     return calendar.timegm(dt.timetuple())
 
 
