@@ -15,11 +15,11 @@
 """
 import sys
 import calendar
-import datetime
 import BTrees.Length
+import zope.container.contained
 import zope.catalog.interfaces
 import zope.catalog.attribute
-import zope.container.contained
+import zc.catalog.index
 
 from zope.interface import implements
 from zope.interface.interfaces import IMethod, IInterface
@@ -168,11 +168,7 @@ def to_timestamp(dt):
     return calendar.timegm(dt.timetuple())
 
 
-def from_timestamp(stamp):
-    return datetime.datetime.fromtimestamp(float(stamp))
-
-
-class _DatetimeIndex(ValueIndex):
+class _DatetimeIndex(zc.catalog.index.ValueIndex):
 
     def clear(self):
         self.values_to_documents = BTrees.LOBTree.LOBTree()
@@ -186,8 +182,21 @@ class _DatetimeIndex(ValueIndex):
         value = to_timestamp(value)
         super(_DatetimeIndex, self).index_doc(doc_id, value)
 
-    # def apply():
-    #     pass
+    def apply(self, query):
+        for name in ['any_of', 'between']:
+            if name not in query:
+                continue
+            # The "value" of the dict is a sequence of datetime objects.
+            # Convert it into a timestamps.
+            query[name] = [to_timestamp(v) for v in query[name]]
+        return super(_DatetimeIndex, self).apply(query)
+
+    def values(self, min=None, max=None, excludemin=False, excludemax=False,
+               doc_id=None):
+        min = to_timestamp(min) if min is not None else None
+        max = to_timestamp(max) if max is not None else None
+        return super(_DatetimeIndex, self).values(
+            min, max, excludemin, excludemax, doc_id)
 
 
 class DatetimeIndex(
