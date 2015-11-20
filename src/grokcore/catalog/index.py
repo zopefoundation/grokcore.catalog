@@ -14,7 +14,13 @@
 """grokcore.catalog index definitions
 """
 import sys
+import calendar
+import BTrees.Length
+import zope.container.contained
 import zope.catalog.interfaces
+import zope.catalog.attribute
+import zc.catalog.index
+
 from zope.interface import implements
 from zope.interface.interfaces import IMethod, IInterface
 from zope.catalog.interfaces import IAttributeIndex
@@ -156,3 +162,60 @@ class Value(AttributeIndexDefinition):
     values.
     """
     index_class = ValueIndex
+
+
+def to_timestamp(dt):
+    if dt is None:
+        return None
+    return calendar.timegm(dt.timetuple())
+
+
+class _DatetimeIndex(zc.catalog.index.ValueIndex):
+
+    def clear(self):
+        self.values_to_documents = BTrees.LOBTree.LOBTree()
+        self.documents_to_values = BTrees.LLBTree.LLBTree()
+        self.documentCount = BTrees.Length.Length(0)
+        self.wordCount = BTrees.Length.Length(0)
+
+    def index_doc(self, doc_id, value):
+        if value is None:
+            return
+        value = to_timestamp(value)
+        super(_DatetimeIndex, self).index_doc(doc_id, value)
+
+    def apply(self, query):
+        if 'any_of' in query:
+            # The "value" of the dict is a sequence of datetime objects.
+            # Convert it into a timestamps.
+            query['any_of'] = [to_timestamp(v) for v in query['any_of']]
+        elif 'between' in query:
+            # The "value" of the dict is a sequence of arguments to pass on to
+            # the underlying btree. Convert the first two parameters that are
+            # datetime objects (or None) into timestamps.
+            query['between'] = parameters = list(query['between'])
+            parameters[0] = to_timestamp(parameters[0])
+            parameters[1] = to_timestamp(parameters[1])
+        return super(_DatetimeIndex, self).apply(query)
+
+    def values(self, min=None, max=None, excludemin=False, excludemax=False,
+               doc_id=None):
+        min = to_timestamp(min) if min is not None else None
+        max = to_timestamp(max) if max is not None else None
+        return super(_DatetimeIndex, self).values(
+            min, max, excludemin, excludemax, doc_id)
+
+
+class DatetimeIndex(
+        zope.catalog.attribute.AttributeIndex,
+        _DatetimeIndex,
+        zope.container.contained.Contained):
+    pass
+
+
+class Datetime(AttributeIndexDefinition):
+    """A :class:`grokcore.catalog.Indexes` index specifically meant for
+    datetime objects.
+
+    """
+    index_class = DatetimeIndex
