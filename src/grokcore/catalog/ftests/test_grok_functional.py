@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
-
+import doctest
 import unittest
-import grokcore.catalog
-
 from pkg_resources import resource_listdir
-from zope.testing import doctest
+
 from zope.app.appsetup.testlayer import ZODBLayer
+import grokcore.catalog
 
 
 FunctionalLayer = ZODBLayer(grokcore.catalog)

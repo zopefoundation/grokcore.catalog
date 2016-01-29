@@ -4,7 +4,7 @@ CHANGES
 2.3 (unreleased)
 ================
 
-- Nothing changed yet.
+- Update tests.
 
 
 2.2 (2015-11-20)
