@@ -15,8 +15,9 @@ We are able to query the catalog::
   >>> from zope.catalog.interfaces import ICatalog
   >>> from zope.component import getUtility, queryUtility
   >>> catalog = getUtility(ICatalog)
-  >>> sorted(catalog.keys())
-  [u'age', u'age2', u'message', u'message2', u'name', u'name2']
+  >>> result = sorted(catalog.keys())
+  >>> print(' '.join(result))
+  age  age2  message  message2  name  name2
 
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::

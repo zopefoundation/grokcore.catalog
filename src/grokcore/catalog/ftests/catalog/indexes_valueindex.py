@@ -51,7 +51,7 @@ Unfortunately ftests don't have good isolation from each other yet.
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container, Model
-from zope.interface import implements, Interface, Attribute
+from zope.interface import implementer, Interface, Attribute
 
 
 class Herd(Container, grokcore.site.Application):
@@ -69,8 +69,8 @@ class SabreToothIndexes(grokcore.catalog.Indexes):
     feature = grokcore.catalog.Value()
 
 
+@implementer(ISabreTooth)
 class SabreTooth(Model):
-    implements(ISabreTooth)
 
     def __init__(self, name, features):
         self.name = name

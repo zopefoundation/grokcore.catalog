@@ -61,6 +61,7 @@ class IndexDefinition(object):
         # the index with the given attributes.
         catalog[name] = self.index_class(*self._args, **self._kw)
 
+
 @implementer(IAttributeIndexDefinition)
 class AttributeIndexDefinition(object):
     """The definition of a particular index in a

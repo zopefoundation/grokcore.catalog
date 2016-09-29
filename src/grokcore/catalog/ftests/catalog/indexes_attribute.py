@@ -23,7 +23,7 @@ We are able to query the catalog::
   >>> catalog = getUtility(ICatalog)
 
   >>> for obj in catalog.searchResults(how_old=(13, 13)):
-  ...   print obj.name
+  ...   print(obj.name)
   Alpha
 
 Nuke the catalog and intids in the end, so as not to confuse
@@ -43,7 +43,7 @@ other tests::
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container, Model
-from zope.interface import implements, Attribute, Interface
+from zope.interface import implementer, Attribute, Interface
 
 
 class Herd(Container, grokcore.site.Application):
@@ -63,8 +63,8 @@ class MammothIndexes(grokcore.catalog.Indexes):
     how_old = grokcore.catalog.Field(attribute='age')
 
 
+@implementer(IMammoth)
 class Mammoth(Model):
-    implements(IMammoth)
 
     def __init__(self, name, age):
         self.name = name

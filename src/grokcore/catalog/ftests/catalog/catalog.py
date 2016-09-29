@@ -17,7 +17,7 @@ Then we are able to query the catalog:
   >>> from zope.component import getUtility
   >>> catalog = getUtility(ICatalog)
   >>> for obj in catalog.searchResults(name=('Ellie', 'Ellie')):
-  ...     print obj.name
+  ...     print(obj.name)
   Ellie
 
 Nuke the catalog and intids in the end, so as not to confuse
@@ -51,8 +51,8 @@ class IMammoth(interface.Interface):
     name = interface.Attribute('name')
 
 
+@interface.implementer(IMammoth)
 class Mammoth(Model):
-    interface.implements(IMammoth)
 
     def __init__(self, name):
         self.name = name

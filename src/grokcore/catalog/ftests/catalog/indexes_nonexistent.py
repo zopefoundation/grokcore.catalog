@@ -5,15 +5,14 @@ to set up an index for an attribute that does not exist on the interface.
 
 Let's set up a site in which we manage a couple of objects::
 
+(Note how the test output needs to be on one line to please to
+EXCEPTION_2TO3 normalizer)
+
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd
   Traceback (most recent call last):
     ...
-  GrokError: grokcore.catalog.Indexes in <module
-  'grokcore.catalog.ftests.catalog.indexes_nonexistent' from ...>
-  refers to an attribute or method 'foo' on interface <InterfaceClass
-  grokcore.catalog.ftests.catalog.indexes_nonexistent.IMammoth>,
-  but this does not exist.
+  martian.error.GrokError: grokcore.catalog.Indexes in <module 'grokcore.catalog.ftests.catalog.indexes_nonexistent' from ...> refers to an attribute or method 'foo' on interface <InterfaceClass grokcore.catalog.ftests.catalog.indexes_nonexistent.IMammoth>, but this does not exist.
 
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::

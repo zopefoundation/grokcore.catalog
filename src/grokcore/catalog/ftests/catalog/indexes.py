@@ -20,7 +20,7 @@ We are able to query the catalog::
   >>> from zope.component import getUtility, queryUtility
   >>> catalog = getUtility(ICatalog)
   >>> for obj in catalog.searchResults(name=('Beta', 'Beta')):
-  ...   print obj.name
+  ...   print(obj.name)
   Beta
 
 Let's query the text index, which incidentally also indexes a method::
@@ -65,7 +65,7 @@ Unfortunately ftests don't have good isolation from each other yet.
 import grokcore.catalog
 import grokcore.site
 from grokcore.content import Container, Model
-from zope.interface import Interface, Attribute, implements
+from zope.interface import Interface, Attribute, implementer
 
 
 class Herd(Container, grokcore.site.Application):
@@ -94,8 +94,8 @@ class MammothIndexes(grokcore.catalog.Indexes):
     message = grokcore.catalog.Text()
 
 
+@implementer(IMammoth)
 class Mammoth(Model):
-    implements(IMammoth)
 
     def __init__(self, name, age, message):
         self.age = age

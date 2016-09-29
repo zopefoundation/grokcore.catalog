@@ -10,7 +10,7 @@ Let's set up a site in which we manage a couple of objects::
   >>> getRootFolder()['herd'] = herd
   Traceback (most recent call last):
     ...
-  KeyError: u'name'
+  KeyError:...
 
   >>> from zope.site.hooks import setSite
   >>> setSite(herd)
