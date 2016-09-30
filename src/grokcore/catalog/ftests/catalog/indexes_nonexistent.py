@@ -6,7 +6,7 @@ to set up an index for an attribute that does not exist on the interface.
 Let's set up a site in which we manage a couple of objects::
 
 (Note how the test output needs to be on one line to please to
-EXCEPTION_2TO3 normalizer)
+IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
 
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd

@@ -39,7 +39,7 @@ def suiteFromPackage(name):
             optionflags=(
                 doctest.ELLIPSIS +
                 doctest.NORMALIZE_WHITESPACE +
-                renormalizing.EXCEPTION_2TO3))
+                renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
 
         suite.addTest(test)
 

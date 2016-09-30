@@ -31,7 +31,7 @@ def suiteFromPackage(name):
             optionflags=(doctest.ELLIPSIS +
                          doctest.NORMALIZE_WHITESPACE +
                          doctest.REPORT_NDIFF +
-                         renormalizing.EXCEPTION_2TO3))
+                         renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
         test.layer = FunctionalLayer
 
         suite.addTest(test)

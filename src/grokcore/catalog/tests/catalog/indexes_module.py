@@ -2,7 +2,7 @@
 You can create an index on module level, but that should lead to a GrokError:
 
 (Note how the test output needs to be on one line to please to
-EXCEPTION_2TO3 normalizer)
+IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
 
   >>> func()
   Traceback (most recent call last):
