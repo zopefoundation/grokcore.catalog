@@ -4,14 +4,12 @@ CHANGES
 2.3 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Introduce IntId index that is more optimized to index values by their int ids.
 
 2.2.1 (2016-01-29)
 ==================
 
 - Update tests.
-
 
 2.2 (2015-11-20)
 ================
