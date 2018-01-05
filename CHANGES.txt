@@ -4,8 +4,7 @@ CHANGES
 2.4 (unreleased)
 ================
 
-- Nothing changed yet.
-
+- Python 3 compatibility.
 
 2.3 (2017-08-11)
 ================
