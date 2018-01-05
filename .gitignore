@@ -1,15 +1,17 @@
 syntax:glob
 
+.coverage
+.installed.cfg
+.mr.developer.cfg
+.tox
 *.bak
 *.pyc
 *.pyo
 *.swp
 bin
 dev
-develop/*
 develop-eggs
+develop/*
 eggs
-.installed.cfg
-.mr.developer.cfg
 parts
 src/*.egg-info
