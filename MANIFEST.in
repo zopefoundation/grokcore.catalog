@@ -1,4 +1,3 @@
-global-include *.mo
 include *.txt
 include *.rst
 include bootstrap.py

@@ -49,7 +49,7 @@ Unfortunately ftests don't have good isolation from each other yet.
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container, Model
-from zope.interface import implements, Interface, Attribute
+from zope.interface import implementer, Interface, Attribute
 
 
 class Herd(Container, grokcore.site.Application):
@@ -67,8 +67,8 @@ class MammothIndexes(grokcore.catalog.Indexes):
     features = grokcore.catalog.Set()
 
 
+@implementer(IMammoth)
 class Mammoth(Model):
-    implements(IMammoth)
 
     def __init__(self, name, features):
         self.name = name

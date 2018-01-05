@@ -47,7 +47,7 @@ other tests::
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container
-from zope.interface import Interface, Attribute, implements
+from zope.interface import Interface, Attribute, implementer
 from zope.component.interfaces import ObjectEvent, IObjectEvent
 
 
@@ -59,8 +59,9 @@ class IMudPartyEvent(IObjectEvent):
     pass
 
 
+@implementer(IMudPartyEvent)
 class MudPartyEvent(ObjectEvent):
-    implements(IMudPartyEvent)
+    pass
 
 
 class IMammoth(Interface):

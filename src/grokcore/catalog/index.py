@@ -22,7 +22,7 @@ import zope.catalog.interfaces
 import zope.catalog.attribute
 import zc.catalog.index
 
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface.interfaces import IMethod, IInterface
 from zope.catalog.interfaces import IAttributeIndex
 from zope.catalog.field import FieldIndex
@@ -35,6 +35,7 @@ from grokcore.catalog.interfaces import IIndexDefinition
 from grokcore.catalog.interfaces import IAttributeIndexDefinition
 
 
+@implementer(IIndexDefinition)
 class IndexDefinition(object):
     """The definition of a particular index in a
     :data:`grokcore.catalog.Indexes` class.
@@ -45,8 +46,6 @@ class IndexDefinition(object):
     declaration in Grok application code is nearly always a no-op.
 
     """
-    implements(IIndexDefinition)
-
     index_class = None
 
     def __init__(self, *args, **kw):
@@ -65,6 +64,7 @@ class IndexDefinition(object):
         catalog[name] = self.index_class(*self._args, **self._kw)
 
 
+@implementer(IAttributeIndexDefinition)
 class AttributeIndexDefinition(object):
     """The definition of a particular index in a
     :data:`grokcore.catalog.Indexes` class.
@@ -88,8 +88,6 @@ class AttributeIndexDefinition(object):
     declaration in Grok application code is nearly always a no-op.
 
     """
-    implements(IAttributeIndexDefinition)
-
     index_class = None
 
     def __init__(self, *args, **kw):

@@ -43,12 +43,12 @@ Let's query the datetime index::
 Note how the index uses a seconds-resolution and sub-second data is ignored::
 
   >>> herd['omega'] = Opossum(
-  ...     'Omega', datetime.datetime(2002, 5, 3, 14, 53, 14, 000001))
+  ...     'Omega', datetime.datetime(2002, 5, 3, 14, 53, 14, 1))
   >>> herd['psi'] = Opossum(
   ...     'Psi', datetime.datetime(2002, 5, 3, 14, 53, 14, 999999))
   >>> sortedResults(catalog, birthday={
-  ...     'between': [datetime.datetime(2002, 5, 3l, 14, 53, 14),
-  ...                 datetime.datetime(2002, 5, 3l, 14, 53, 14)]})
+  ...     'between': [datetime.datetime(2002, 5, 3, 14, 53, 14),
+  ...                 datetime.datetime(2002, 5, 3, 14, 53, 14)]})
   ['Omega', 'Psi']
 
 Nuke the catalog and intids in the end, so as not to confuse
@@ -71,7 +71,7 @@ import datetime
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container, Model
-from zope.interface import implements, Interface, Attribute
+from zope.interface import implementer, Interface, Attribute
 
 
 class Herd(Container, grokcore.site.Application):
@@ -90,8 +90,8 @@ class OpossumIndexes(grokcore.catalog.Indexes):
     birthday = grokcore.catalog.Datetime()
 
 
+@implementer(IOpossum)
 class Opossum(Model):
-    implements(IOpossum)
 
     def __init__(self, name, birthday):
         self.name = name

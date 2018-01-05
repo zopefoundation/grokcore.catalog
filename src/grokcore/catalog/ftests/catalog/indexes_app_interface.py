@@ -58,19 +58,21 @@ other tests::
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container
-from zope.interface import Attribute, Interface, implements
+from zope.interface import Attribute, Interface, implementer
 
 
 class IHerd(Interface):
     pass
 
 
+@implementer(IHerd)
 class Herd(Container, grokcore.site.Application):
-    implements(IHerd)
+    pass
 
 
+@implementer(IHerd)
 class Herd2(Container, grokcore.site.Application):
-    implements(IHerd)
+    pass
 
 
 class IMammoth(Interface):

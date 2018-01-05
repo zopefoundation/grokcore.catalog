@@ -21,7 +21,7 @@ We are able to query the catalog::
   >>> from zope.component import getUtility
   >>> catalog = getUtility(ICatalog)
   >>> for obj in catalog.searchResults(name=('Beta', 'Beta')):
-  ...   print obj.name
+  ...   print(obj.name)
   Beta
 
 Let's query the text index, which incidentally also indexes a method::
