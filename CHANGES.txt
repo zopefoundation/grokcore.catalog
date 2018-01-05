@@ -1,17 +1,21 @@
 CHANGES
 *******
 
-2.3 (unreleased)
+2.4 (unreleased)
 ================
 
 - Nothing changed yet.
 
 
+2.3 (2017-08-11)
+================
+
+- Introduce IntId index that is more optimized to index values by their int ids.
+
 2.2.1 (2016-01-29)
 ==================
 
 - Update tests.
-
 
 2.2 (2015-11-20)
 ================

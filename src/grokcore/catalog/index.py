@@ -16,6 +16,7 @@
 import sys
 import calendar
 import BTrees.Length
+import zope.component
 import zope.container.contained
 import zope.catalog.interfaces
 import zope.catalog.attribute
@@ -26,6 +27,7 @@ from zope.interface.interfaces import IMethod, IInterface
 from zope.catalog.interfaces import IAttributeIndex
 from zope.catalog.field import FieldIndex
 from zope.catalog.text import TextIndex
+from zope.intid.interfaces import IIntIds
 from zc.catalog.catalogindex import SetIndex, ValueIndex
 from martian.error import GrokError, GrokImportError
 from martian.util import frame_is_class
@@ -212,9 +214,48 @@ class DatetimeIndex(
     pass
 
 
+class _IntIdIndex(zope.index.field.index.FieldIndex):
+
+    def clear(self):
+        self._fwd_index = BTrees.IOBTree.IOBTree()
+        self._rev_index = BTrees.IIBTree.IIBTree()
+        self._num_docs = BTrees.Length.Length(0)
+
+    def _get_value_id(self, value):
+        if value is None:
+            return None
+        if isinstance(value, int):
+            return value
+        intids = zope.component.getUtility(IIntIds)
+        return intids.getId(value)
+
+    def index_doc(self, docid, value):
+        return super(_IntIdIndex, self).index_doc(
+            docid, self._get_value_id(value))
+
+    def apply(self, query):
+        value = self._get_value_id(query)
+        return super(_IntIdIndex, self).apply((value, value))
+
+
+class IntIdIndex(
+        zope.catalog.attribute.AttributeIndex,
+        _IntIdIndex,
+        zope.container.contained.Contained):
+    pass
+
+
 class Datetime(AttributeIndexDefinition):
     """A :class:`grokcore.catalog.Indexes` index specifically meant for
     datetime objects.
 
     """
     index_class = DatetimeIndex
+
+
+class IntId(AttributeIndexDefinition):
+    """A :class:`grokcore.catalog.Indexes` index specifically meant to index
+    values with their intid.
+
+    """
+    index_class = IntIdIndex
