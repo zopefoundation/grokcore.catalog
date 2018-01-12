@@ -13,5 +13,6 @@ dev
 develop-eggs
 develop/*
 eggs
+htmlcov/
 parts
 src/*.egg-info
