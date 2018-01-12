@@ -8,6 +8,6 @@
   <include package="zope.container" />
   <include package="zope.app.appsetup" file="ftesting.zcml" />
   <include package="grokcore.catalog" />
-  <grok:grok package="grokcore.catalog.ftests" />
+  <grok:grok package="grokcore.catalog.tests.functional" />
 
 </configure>
