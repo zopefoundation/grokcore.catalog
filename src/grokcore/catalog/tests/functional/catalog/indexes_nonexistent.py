@@ -12,7 +12,7 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
   >>> getRootFolder()['herd'] = herd
   Traceback (most recent call last):
     ...
-  martian.error.GrokError: grokcore.catalog.Indexes in <module 'grokcore.catalog.ftests.catalog.indexes_nonexistent' from ...> refers to an attribute or method 'foo' on interface <InterfaceClass grokcore.catalog.ftests.catalog.indexes_nonexistent.IMammoth>, but this does not exist.
+  martian.error.GrokError: grokcore.catalog.Indexes in <module 'grokcore.catalog.tests.functional.catalog.indexes_nonexistent' from ...> refers to an attribute or method 'foo' on interface <InterfaceClass grokcore.catalog.tests.functional.catalog.indexes_nonexistent.IMammoth>, but this does not exist.
 
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
