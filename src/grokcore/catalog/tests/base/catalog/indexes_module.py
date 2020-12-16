@@ -12,7 +12,7 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
   >>> from grokcore.catalog import testing
   >>> testing.grok(__name__)
 
-"""
+"""  # noqa: E501 line too long
 import grokcore.site
 import grokcore.content
 import grokcore.catalog

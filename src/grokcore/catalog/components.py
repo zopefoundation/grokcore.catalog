@@ -71,4 +71,5 @@ class IndexesClass(object):
         # inline templates
         self.__grok_module__ = martian.util.caller_module()
 
+
 Indexes = IndexesClass('Indexes')

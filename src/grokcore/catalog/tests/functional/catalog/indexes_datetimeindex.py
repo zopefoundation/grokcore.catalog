@@ -3,6 +3,7 @@ We now demonstrate the use of a ValueIndex with Grok::
 
 Let's set up a site in which we manage a couple of objects::
 
+  >>> import datetime
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd
   >>> from zope.site.hooks import setSite
@@ -67,7 +68,6 @@ other tests::
 Unfortunately ftests don't have good isolation from each other yet.
 """
 
-import datetime
 import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container, Model
