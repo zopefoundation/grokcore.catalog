@@ -15,9 +15,9 @@
 """
 from zope.interface import Interface, Attribute
 
+
 class IIndexDefinition(Interface):
-    """Define an index for grok.Indexes.
-    """
+    """Define an index for grok.Indexes."""
 
     def __init__(self, *args, **kw):
         """Arguments and keyword arguments passed to the index class.
@@ -33,6 +33,7 @@ class IIndexDefinition(Interface):
         index for interface or class context.
         """
 
+
 class IAttributeIndexDefinition(IIndexDefinition):
     """Define an index for grok.Indexes providing IAttributeIndex.
     """
@@ -46,6 +47,7 @@ class IAttributeIndexDefinition(IIndexDefinition):
 
         Arguments and keyword arguments passed to the index class.
         """
+
 
 class IBaseClasses(Interface):
     Indexes = Attribute("Base class for a catalog indexes component.")

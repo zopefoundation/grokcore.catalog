@@ -53,6 +53,3 @@ def test_suite():
     for name in ['catalog']:
         suite.addTest(suiteFromPackage(name))
     return suite
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')
