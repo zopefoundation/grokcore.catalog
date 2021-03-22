@@ -12,7 +12,7 @@ Let's set up a site in which we manage a couple of objects::
     ...
   KeyError:...
 
-  >>> from zope.site.hooks import setSite
+  >>> from zope.component.hooks import setSite
   >>> setSite(herd)
   >>> from zope.catalog.interfaces import ICatalog
   >>> from zope.component import getUtility, queryUtility
@@ -30,6 +30,7 @@ other tests::
   >>> intids = component.getUtility(IIntIds)
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
+  >>> setSite(None)
 
 Unfortunately ftests don't have good isolation from each other yet.
 """

@@ -5,7 +5,7 @@ any site::
 
 Let's set up a site in which we manage a couple of objects::
 
-  >>> from zope.site.hooks import setSite
+  >>> from zope.component.hooks import setSite
 
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd
@@ -41,6 +41,7 @@ other tests::
   >>> intids = component.getUtility(IIntIds)
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
+  >>> setSite(None)
 
 """
 
@@ -48,7 +49,7 @@ import grokcore.site
 import grokcore.catalog
 from grokcore.content import Container
 from zope.interface import Interface, Attribute, implementer
-from zope.component.interfaces import ObjectEvent, IObjectEvent
+from zope.interface.interfaces import ObjectEvent, IObjectEvent
 
 
 class Herd(Container, grokcore.site.Site):
