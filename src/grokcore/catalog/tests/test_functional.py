@@ -3,14 +3,21 @@ import unittest
 from pkg_resources import resource_listdir
 
 from zope.app.appsetup.testlayer import ZODBLayer
+from zope.site.hooks import setSite
 from zope.testing import renormalizing
 
 import grokcore.catalog
 
 
-FunctionalLayer = ZODBLayer(grokcore.catalog)
+class CatalogZODBLayer(ZODBLayer):
+    """Custom ZODBLayer which also cleans up the site."""
+
+    def testTearDown(self):
+        setSite(None)
+        super(CatalogZODBLayer, self).testTearDown()
 
 
+FunctionalLayer = CatalogZODBLayer(grokcore.catalog)
 checker = renormalizing.RENormalizing()
 
 
@@ -45,7 +52,3 @@ def test_suite():
     for name in ["catalog"]:
         suite.addTest(suiteFromPackage(name))
     return suite
-
-
-if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite')

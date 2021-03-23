@@ -17,7 +17,7 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
 Nuke the catalog and intids in the end, so as not to confuse
 other tests::
 
-  >>> from zope.site.hooks import setSite
+  >>> from zope.component.hooks import setSite
   >>> setSite(herd)
   >>> from zope.catalog.interfaces import ICatalog
   >>> from zope.component import getUtility

@@ -8,6 +8,8 @@ CHANGES
 
 - Drop support for Python 3.4.
 
+- Fix tests to be able to run with ``zope.component >= 5``.
+
 
 3.0.1 (2018-01-12)
 ==================
