@@ -38,7 +38,6 @@ other tests::
   >>> intids = component.getUtility(IIntIds)
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
-  >>> setSite(None)
 """
 
 import grokcore.site

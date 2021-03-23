@@ -32,7 +32,6 @@ other tests::
   >>> intids = component.getUtility(IIntIds)
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
-  >>> setSite(None)
 """  # noqa: E501 line too long
 
 import grokcore.site

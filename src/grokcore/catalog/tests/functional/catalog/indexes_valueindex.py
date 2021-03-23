@@ -44,7 +44,6 @@ other tests::
   >>> intids = component.getUtility(IIntIds)
   >>> sm.unregisterUtility(intids, provided=IIntIds)
   True
-  >>> setSite(None)
 
 Unfortunately ftests don't have good isolation from each other yet.
 """
