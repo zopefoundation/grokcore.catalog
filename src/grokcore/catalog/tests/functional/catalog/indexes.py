@@ -62,10 +62,14 @@ other tests::
 Unfortunately ftests don't have good isolation from each other yet.
 """
 
-import grokcore.catalog
 import grokcore.site
-from grokcore.content import Container, Model
-from zope.interface import Interface, Attribute, implementer
+from grokcore.content import Container
+from grokcore.content import Model
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.catalog
 
 
 class Herd(Container, grokcore.site.Application):

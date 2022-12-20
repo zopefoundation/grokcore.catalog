@@ -13,10 +13,11 @@
 ##############################################################################
 
 import martian.util
+
 from grokcore.catalog.interfaces import IIndexDefinition
 
 
-class IndexesClass(object):
+class IndexesClass:
     """Base class for index collections in a Grok application.
 
     A `grokcore.catalog.Indexes` utility provides one or more Zope Database

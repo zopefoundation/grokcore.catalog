@@ -56,9 +56,12 @@ other tests::
 """
 
 import grokcore.site
-import grokcore.catalog
 from grokcore.content import Container
-from zope.interface import Attribute, Interface, implementer
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.interface import implementer
+
+import grokcore.catalog
 
 
 class IHerd(Interface):

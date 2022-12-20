@@ -13,12 +13,13 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
   >>> testing.grok(__name__)
 
 """  # noqa: E501 line too long
-import grokcore.site
 import grokcore.content
-import grokcore.catalog
+import grokcore.site
 import zope.index.field
 
-from grokcore.catalog import index, Indexes
+import grokcore.catalog
+from grokcore.catalog import Indexes
+from grokcore.catalog import index
 
 
 def func():

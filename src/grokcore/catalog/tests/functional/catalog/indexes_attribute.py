@@ -41,9 +41,13 @@ other tests::
 """
 
 import grokcore.site
+from grokcore.content import Container
+from grokcore.content import Model
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.interface import implementer
+
 import grokcore.catalog
-from grokcore.content import Container, Model
-from zope.interface import implementer, Attribute, Interface
 
 
 class Herd(Container, grokcore.site.Application):

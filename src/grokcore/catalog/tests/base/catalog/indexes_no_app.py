@@ -13,11 +13,12 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
   martian.error.GrokError: No site specified for grokcore.catalog.Indexes subclass in module <module 'grokcore.catalog.tests.base.catalog.indexes_no_app' from ...>. Use grokcore.site.site() to specify.
 
 """  # noqa: E501 line too long
-import grokcore.site
-import grokcore.catalog
 import grokcore.component
+import grokcore.site
+from grokcore.content import Container
+from grokcore.content import Model
 
-from grokcore.content import Model, Container
+import grokcore.catalog
 
 
 class Herd(Container, grokcore.site.Application):

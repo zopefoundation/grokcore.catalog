@@ -13,13 +13,11 @@
 ##############################################################################
 """grokcore.catalog meta
 """
-import martian
-import zope.component
 import grokcore.component
 import grokcore.site
 import grokcore.site.interfaces
-
-from grokcore.catalog.components import IndexesClass
+import martian
+import zope.component
 from martian.error import GrokError
 from zope.catalog.catalog import Catalog
 from zope.catalog.interfaces import ICatalog
@@ -27,6 +25,8 @@ from zope.exceptions.interfaces import DuplicationError
 from zope.intid import IntIds
 from zope.intid.interfaces import IIntIds
 from zope.lifecycleevent.interfaces import IObjectAddedEvent
+
+from grokcore.catalog.components import IndexesClass
 
 
 class IndexesGrokker(martian.InstanceGrokker):
@@ -63,7 +63,7 @@ class IndexesGrokker(martian.InstanceGrokker):
         return True
 
 
-class IndexesSetupSubscriber(object):
+class IndexesSetupSubscriber:
     """Helper that sets up indexes when their Grok site is created.
 
     Each `grokcore.catalog.Indexes` class serves as an assertion that,

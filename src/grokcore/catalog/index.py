@@ -13,30 +13,34 @@
 ##############################################################################
 """grokcore.catalog index definitions
 """
-import sys
 import calendar
+import sys
+
 import BTrees.Length
+import zc.catalog.index
+import zope.catalog.attribute
+import zope.catalog.interfaces
 import zope.component
 import zope.container.contained
-import zope.catalog.interfaces
-import zope.catalog.attribute
-import zc.catalog.index
-
-from zope.interface import implementer
-from zope.interface.interfaces import IMethod, IInterface
-from zope.catalog.interfaces import IAttributeIndex
-from zope.catalog.field import FieldIndex
-from zope.catalog.text import TextIndex
-from zope.intid.interfaces import IIntIds
-from zc.catalog.catalogindex import SetIndex, ValueIndex
-from martian.error import GrokError, GrokImportError
+from martian.error import GrokError
+from martian.error import GrokImportError
 from martian.util import frame_is_class
-from grokcore.catalog.interfaces import IIndexDefinition
+from zc.catalog.catalogindex import SetIndex
+from zc.catalog.catalogindex import ValueIndex
+from zope.catalog.field import FieldIndex
+from zope.catalog.interfaces import IAttributeIndex
+from zope.catalog.text import TextIndex
+from zope.interface import implementer
+from zope.interface.interfaces import IInterface
+from zope.interface.interfaces import IMethod
+from zope.intid.interfaces import IIntIds
+
 from grokcore.catalog.interfaces import IAttributeIndexDefinition
+from grokcore.catalog.interfaces import IIndexDefinition
 
 
 @implementer(IIndexDefinition)
-class IndexDefinition(object):
+class IndexDefinition:
     """The definition of a particular index in a
     :data:`grokcore.catalog.Indexes` class.
 
@@ -65,7 +69,7 @@ class IndexDefinition(object):
 
 
 @implementer(IAttributeIndexDefinition)
-class AttributeIndexDefinition(object):
+class AttributeIndexDefinition:
     """The definition of a particular index in a
     :data:`grokcore.catalog.Indexes` class.
 
@@ -183,7 +187,7 @@ class _DatetimeIndex(zc.catalog.index.ValueIndex):
         if value is None:
             return
         value = to_timestamp(value)
-        super(_DatetimeIndex, self).index_doc(doc_id, value)
+        super().index_doc(doc_id, value)
 
     def apply(self, query):
         if 'any_of' in query:
@@ -197,13 +201,13 @@ class _DatetimeIndex(zc.catalog.index.ValueIndex):
             query['between'] = parameters = list(query['between'])
             parameters[0] = to_timestamp(parameters[0])
             parameters[1] = to_timestamp(parameters[1])
-        return super(_DatetimeIndex, self).apply(query)
+        return super().apply(query)
 
     def values(self, min=None, max=None, excludemin=False, excludemax=False,
                doc_id=None):
         min = to_timestamp(min) if min is not None else None
         max = to_timestamp(max) if max is not None else None
-        return super(_DatetimeIndex, self).values(
+        return super().values(
             min, max, excludemin, excludemax, doc_id)
 
 
@@ -230,12 +234,12 @@ class _IntIdIndex(zope.index.field.index.FieldIndex):
         return intids.getId(value)
 
     def index_doc(self, docid, value):
-        return super(_IntIdIndex, self).index_doc(
+        return super().index_doc(
             docid, self._get_value_id(value))
 
     def apply(self, query):
         value = self._get_value_id(query)
-        return super(_IntIdIndex, self).apply((value, value))
+        return super().apply((value, value))
 
 
 class IntIdIndex(

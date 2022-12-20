@@ -36,14 +36,16 @@ other tests::
 
 """
 
+from grokcore.content import Container
+from grokcore.content import Model
+from grokcore.site import Site
+from grokcore.site import local_utility
 from zope import interface
+from zope.catalog.catalog import Catalog
+from zope.catalog.field import FieldIndex
+from zope.catalog.interfaces import ICatalog
 from zope.intid import IntIds
 from zope.intid.interfaces import IIntIds
-from zope.catalog.catalog import Catalog
-from zope.catalog.interfaces import ICatalog
-from zope.catalog.field import FieldIndex
-from grokcore.content import Model, Container
-from grokcore.site import local_utility, Site
 
 
 def setup_catalog(catalog):

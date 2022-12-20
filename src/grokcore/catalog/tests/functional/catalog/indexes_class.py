@@ -54,8 +54,10 @@ Unfortunately ftests don't have good isolation from each other yet.
 """
 
 import grokcore.site
+from grokcore.content import Container
+from grokcore.content import Model
+
 import grokcore.catalog
-from grokcore.content import Container, Model
 
 
 class Herd(Container, grokcore.site.Application):

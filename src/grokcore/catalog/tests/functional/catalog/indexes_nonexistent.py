@@ -35,9 +35,11 @@ other tests::
 """  # noqa: E501 line too long
 
 import grokcore.site
-import grokcore.catalog
-from zope.interface import Interface, Attribute
 from grokcore.content import Container
+from zope.interface import Attribute
+from zope.interface import Interface
+
+import grokcore.catalog
 
 
 class Herd(Container, grokcore.site.Application):
