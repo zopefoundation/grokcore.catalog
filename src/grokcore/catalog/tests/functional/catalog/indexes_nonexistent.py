@@ -5,9 +5,6 @@ to set up an index for an attribute that does not exist on the interface.
 
 Let's set up a site in which we manage a couple of objects::
 
-(Note how the test output needs to be on one line to please to
-IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
-
   >>> herd = Herd()
   >>> getRootFolder()['herd'] = herd
   Traceback (most recent call last):
@@ -35,9 +32,11 @@ other tests::
 """  # noqa: E501 line too long
 
 import grokcore.site
-import grokcore.catalog
-from zope.interface import Interface, Attribute
 from grokcore.content import Container
+from zope.interface import Attribute
+from zope.interface import Interface
+
+import grokcore.catalog
 
 
 class Herd(Container, grokcore.site.Application):

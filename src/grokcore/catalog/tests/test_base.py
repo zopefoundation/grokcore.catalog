@@ -1,9 +1,10 @@
 import doctest
 import unittest
+
 from pkg_resources import resource_listdir
 
-from zope.testing import cleanup, renormalizing
 import zope.component.eventtesting
+from zope.testing import cleanup
 
 
 def setUpZope(test):
@@ -14,12 +15,9 @@ def cleanUpZope(test):
     cleanup.cleanUp()
 
 
-checker = renormalizing.RENormalizing()
-
-
 def suiteFromPackage(name):
     layer_dir = 'base'
-    files = resource_listdir(__name__, '{}/{}'.format(layer_dir, name))
+    files = resource_listdir(__name__, f'{layer_dir}/{name}')
     suite = unittest.TestSuite()
     for filename in files:
         if not filename.endswith('.py'):
@@ -31,17 +29,15 @@ def suiteFromPackage(name):
 
         print(filename)
 
-        dottedname = 'grokcore.catalog.tests.%s.%s.%s' % (
+        dottedname = 'grokcore.catalog.tests.{}.{}.{}'.format(
             layer_dir, name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,
             setUp=setUpZope,
             tearDown=cleanUpZope,
-            checker=checker,
             optionflags=(
                 doctest.ELLIPSIS +
-                doctest.NORMALIZE_WHITESPACE +
-                renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
+                doctest.NORMALIZE_WHITESPACE))
 
         suite.addTest(test)
 

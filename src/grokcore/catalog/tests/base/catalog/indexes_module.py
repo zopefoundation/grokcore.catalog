@@ -1,9 +1,6 @@
 """
 You can create an index on module level, but that should lead to a GrokError:
 
-(Note how the test output needs to be on one line to please to
-IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
-
   >>> func()
   Traceback (most recent call last):
     ...
@@ -13,12 +10,13 @@ IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
   >>> testing.grok(__name__)
 
 """  # noqa: E501 line too long
-import grokcore.site
 import grokcore.content
-import grokcore.catalog
+import grokcore.site
 import zope.index.field
 
-from grokcore.catalog import index, Indexes
+import grokcore.catalog
+from grokcore.catalog import Indexes
+from grokcore.catalog import index
 
 
 def func():

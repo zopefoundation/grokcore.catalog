@@ -45,10 +45,14 @@ other tests::
 """
 
 import grokcore.site
-import grokcore.catalog
 from grokcore.content import Container
-from zope.interface import Interface, Attribute, implementer
-from zope.interface.interfaces import ObjectEvent, IObjectEvent
+from zope.interface import Attribute
+from zope.interface import Interface
+from zope.interface import implementer
+from zope.interface.interfaces import IObjectEvent
+from zope.interface.interfaces import ObjectEvent
+
+import grokcore.catalog
 
 
 class Herd(Container, grokcore.site.Site):
