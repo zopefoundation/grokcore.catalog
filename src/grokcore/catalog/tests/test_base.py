@@ -5,7 +5,6 @@ from pkg_resources import resource_listdir
 
 import zope.component.eventtesting
 from zope.testing import cleanup
-from zope.testing import renormalizing
 
 
 def setUpZope(test):
@@ -14,9 +13,6 @@ def setUpZope(test):
 
 def cleanUpZope(test):
     cleanup.cleanUp()
-
-
-checker = renormalizing.RENormalizing()
 
 
 def suiteFromPackage(name):
@@ -39,11 +35,9 @@ def suiteFromPackage(name):
             dottedname,
             setUp=setUpZope,
             tearDown=cleanUpZope,
-            checker=checker,
             optionflags=(
                 doctest.ELLIPSIS +
-                doctest.NORMALIZE_WHITESPACE +
-                renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
+                doctest.NORMALIZE_WHITESPACE))
 
         suite.addTest(test)
 

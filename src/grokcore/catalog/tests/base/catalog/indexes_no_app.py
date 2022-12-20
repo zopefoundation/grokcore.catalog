@@ -3,9 +3,6 @@ Grok allows you to set up catalog indexes in your application with a
 special indexes declaration.  We do need to specify a site (such as
 the application) for the Indexes however, otherwise we get a GrokError:
 
-(Note how the test output needs to be on one line to please to
-IGNORE_EXCEPTION_MODULE_IN_PYTHON2 normalizer)
-
   >>> from grokcore.catalog import testing
   >>> testing.grok(__name__)
   Traceback (most recent call last):

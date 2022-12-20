@@ -5,7 +5,6 @@ from pkg_resources import resource_listdir
 
 from zope.app.appsetup.testlayer import ZODBLayer
 from zope.site.hooks import setSite
-from zope.testing import renormalizing
 
 import grokcore.catalog
 
@@ -19,7 +18,6 @@ class CatalogZODBLayer(ZODBLayer):
 
 
 FunctionalLayer = CatalogZODBLayer(grokcore.catalog)
-checker = renormalizing.RENormalizing()
 
 
 def suiteFromPackage(name):
@@ -36,12 +34,10 @@ def suiteFromPackage(name):
             layer_dir, name, filename[:-3])
         test = doctest.DocTestSuite(
             dottedname,
-            checker=checker,
             extraglobs=dict(getRootFolder=FunctionalLayer.getRootFolder),
             optionflags=(doctest.ELLIPSIS +
                          doctest.NORMALIZE_WHITESPACE +
-                         doctest.REPORT_NDIFF +
-                         renormalizing.IGNORE_EXCEPTION_MODULE_IN_PYTHON2))
+                         doctest.REPORT_NDIFF))
         test.layer = FunctionalLayer
 
         suite.addTest(test)
