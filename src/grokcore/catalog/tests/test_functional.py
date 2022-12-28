@@ -4,7 +4,7 @@ import unittest
 from pkg_resources import resource_listdir
 
 from zope.app.appsetup.testlayer import ZODBLayer
-from zope.site.hooks import setSite
+from zope.component.hooks import setSite
 
 import grokcore.catalog
 
