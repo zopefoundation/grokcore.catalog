@@ -4,13 +4,9 @@ CHANGES
 4.0 (unreleased)
 ================
 
-- Add support for Python 3.10, 3.11.
+- Add support for Python 3.7, 3.8, 3.9, 3.10, 3.11.
 
-- Drop support for Python 2.7, 3.5, 3.6.
-
-- Add support for Python 3.7, 3.8 and 3.9.
-
-- Drop support for Python 3.4.
+- Drop support for Python 2.7, 3.4, 3.5, 3.6.
 
 - Fix tests to be able to run with ``zope.component >= 5``.
 
