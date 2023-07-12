@@ -31,8 +31,8 @@ Getting grok
 ============
 
 The easiest way to get started with grok is to install the
-`grokproject <http://cheeseshop.python.org/pypi/grokproject>`_ package
-(e.g. via ``easy_install grokproject``) and then create a new project
+`grokproject <https://pypi.org/project/grokproject/>`_ package
+(e.g. via ``pip install grokproject``) and then create a new project
 area by calling the ``grokproject`` script like so::
 
   $ grokproject MyProject
@@ -41,8 +41,8 @@ area by calling the ``grokproject`` script like so::
 This will create a project area in ``MyProject`` as well as download
 and install grok.
 
-You can also get grok from the subversion repository::
+You can also get grok from GitHub::
 
-  svn co svn://svn.zope.org/repos/main/grok/trunk grok
+  git clone git@github.com:zopefoundation/grok.git
 
 Then follow the instructions of ``INSTALL.txt``.

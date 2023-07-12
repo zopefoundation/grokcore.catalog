@@ -7,11 +7,12 @@ from setuptools import setup
 
 
 def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+    with open(os.path.join(os.path.dirname(__file__), *rnames)) as f:
+        return f.read()
 
 
 long_description = (
-    read('README.txt') + '\n' + read('CHANGES.txt'))
+    read('README.rst') + '\n' + read('CHANGES.rst'))
 
 
 tests_require = [
@@ -29,12 +30,11 @@ setup(
     name='grokcore.catalog',
     version='4.0.dev0',
     author='Grok Team',
-    author_email='grok-dev@zope.org',
-    url='http://grok.zope.org',
-    download_url='http://pypi.python.org/pypi/grokcore.catalog',
+    author_email='zope-dev@zope.dev',
+    url='https://github.com/zopefoundation/grokcore.catalog',
     description='Grok-like configuration for catalog and indexes',
     long_description=long_description,
-    license='ZPL',
+    license='ZPL 2.1',
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
@@ -57,7 +57,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'grokcore.component >= 2.5dev',
+        'grokcore.component >= 2.5',
         'grokcore.site >= 1.7',
         'martian >= 0.13',
         'setuptools',
@@ -74,6 +74,5 @@ setup(
         'zope.keyreference',
         'zope.site',
     ],
-    tests_require=tests_require,
     extras_require={'test': tests_require},
 )
