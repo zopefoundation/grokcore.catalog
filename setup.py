@@ -56,6 +56,7 @@ setup(
     namespace_packages=['grokcore'],
     include_package_data=True,
     zip_safe=False,
+    python_requires='>=3.7',
     install_requires=[
         'grokcore.component >= 2.5',
         'grokcore.site >= 1.7',
