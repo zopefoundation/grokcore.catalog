@@ -54,6 +54,7 @@ class IndexesClass:
               to date.
 
     """
+
     def __init__(self, name, bases=(), attrs=None):
         if attrs is None:
             return

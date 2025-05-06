@@ -81,6 +81,7 @@ class IndexesSetupSubscriber:
     instantiated.  At that point its `__call__` method is kicked off and
     it makes sure the index catalogs get created properly.
     """
+
     def __init__(self, catalog_name, indexes, context, module_info):
         self.catalog_name = catalog_name
         self.indexes = indexes
