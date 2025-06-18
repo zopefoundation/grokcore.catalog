@@ -1,6 +1,5 @@
 import os
 
-from setuptools import find_packages
 from setuptools import setup
 
 
@@ -26,7 +25,7 @@ tests_require = [
 
 setup(
     name='grokcore.catalog',
-    version='4.2.dev0',
+    version='5.0.dev0',
     author='Grok Team',
     author_email='zope-dev@zope.dev',
     url='https://github.com/zopefoundation/grokcore.catalog',
@@ -49,9 +48,6 @@ setup(
         'Programming Language :: Python :: Implementation :: PyPy',
         'Framework :: Zope :: 3',
     ],
-    packages=find_packages('src'),
-    package_dir={'': 'src'},
-    namespace_packages=['grokcore'],
     include_package_data=True,
     zip_safe=False,
     python_requires='>=3.9',
