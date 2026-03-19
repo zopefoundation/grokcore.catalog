@@ -1,7 +1,6 @@
 import doctest
 import unittest
-
-from pkg_resources import resource_listdir
+from importlib.resources import files
 
 import zope.component.eventtesting
 from zope.testing import cleanup
@@ -17,9 +16,16 @@ def cleanUpZope(test):
 
 def suiteFromPackage(name):
     layer_dir = 'base'
-    files = resource_listdir(__name__, f'{layer_dir}/{name}')
+    package_dir = files('grokcore.catalog.tests').joinpath(
+        f'{layer_dir}/{name}')
+
+    filenames = []
+    for item in package_dir.iterdir():
+        if item.is_file() and item.name.endswith('.py'):
+            filenames.append(item.name)
+
     suite = unittest.TestSuite()
-    for filename in files:
+    for filename in sorted(filenames):
         if not filename.endswith('.py'):
             continue
         if filename.endswith('_fixture.py'):

@@ -1,7 +1,6 @@
 import doctest
 import unittest
-
-from pkg_resources import resource_listdir
+from importlib.resources import files
 
 from zope.app.appsetup.testlayer import ZODBLayer
 from zope.component.hooks import setSite
@@ -22,9 +21,16 @@ FunctionalLayer = CatalogZODBLayer(grokcore.catalog)
 
 def suiteFromPackage(name):
     layer_dir = 'functional'
-    files = resource_listdir(__name__, f'{layer_dir}/{name}')
+    package_dir = files('grokcore.catalog.tests').joinpath(
+        f'{layer_dir}/{name}')
+
+    filenames = []
+    for item in package_dir.iterdir():
+        if item.is_file() and item.name.endswith('.py'):
+            filenames.append(item.name)
+
     suite = unittest.TestSuite()
-    for filename in files:
+    for filename in sorted(filenames):
         if not filename.endswith('.py'):
             continue
         if filename == '__init__.py':
