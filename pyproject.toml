@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "grokcore.catalog"
-version = "5.1.dev0"
+version = "5.1"
 description = "Grok-like configuration for catalog and indexes"
 license = "ZPL-2.1"
 classifiers = [
