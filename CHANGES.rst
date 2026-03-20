@@ -4,7 +4,11 @@ CHANGES
 5.1 (unreleased)
 ================
 
-- Nothing changed yet.
+- Move package metadata from setup.py to pyproject.toml.
+
+- Add support for Python 3.14.
+
+- Drop support for Python 3.9.
 
 
 5.0 (2025-06-18)
