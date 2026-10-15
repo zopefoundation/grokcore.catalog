@@ -4,7 +4,7 @@ CHANGES
 5.2 (unreleased)
 ================
 
-- Nothing changed yet.
+- Drop support for Python 3.10.
 
 
 5.1 (2026-03-20)
